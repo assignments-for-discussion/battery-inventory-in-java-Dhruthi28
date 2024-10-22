@@ -15,11 +15,11 @@ public class Main {
             double soh = (100.0 * capacity) / 120; // Direct use of ratedCapacity
             
             // Classification logic
-            if (soh > 83) {
+            if (soh > 83) { // Healthy: strictly more than 83%
                 counts.healthy++;
-            } else if (soh >= 63) {
+            } else if (soh >= 63) { // Exchange: 63% <= SoH <= 83%
                 counts.exchange++;
-            } else {
+            } else { // Failed: less than 63%
                 counts.failed++;
             }
         }
@@ -37,26 +37,26 @@ public class Main {
         assert (counts1.failed == 1) : "Failed count failed";
         System.out.println("Test 1 passed");
 
-        // New test: Boundary condition for healthy (83%).
-        int[] presentCapacities2 = {100, (int) (120 * 0.83)}; // 100 Ah (83.33%) and 120 Ah (100%)
+        // New test: Boundary condition for healthy (>83%, not exactly 83%)
+        int[] presentCapacities2 = {(int) (120 * 0.84), 120}; // 84% and 100% SoH
         CountsBySoH counts2 = countBatteriesByHealth(presentCapacities2);
         assert (counts2.healthy == 2) : "Boundary test for healthy failed";
         System.out.println("Test 2 passed");
 
-        // New test: Boundary condition for exchange (63%).
-        int[] presentCapacities3 = {(int) (120 * 0.63), (int) (120 * 0.83) - 1}; // 63% and just below 83%
+        // New test: Boundary condition for exchange (exactly 83% and 63%)
+        int[] presentCapacities3 = {(int) (120 * 0.83), (int) (120 * 0.63)}; // Exactly 83% and 63%
         CountsBySoH counts3 = countBatteriesByHealth(presentCapacities3);
         assert (counts3.healthy == 0) : "Boundary test healthy (none) failed";
         assert (counts3.exchange == 2) : "Boundary test exchange failed";
         System.out.println("Test 3 passed");
 
-        // New test: Failed battery at 0% capacity.
+        // New test: Failed battery at 0% capacity
         int[] presentCapacities4 = {0, (int) (120 * 0.62)}; // 0% and 62% (below 63%)
         CountsBySoH counts4 = countBatteriesByHealth(presentCapacities4);
         assert (counts4.failed == 2) : "Failed boundary test failed";
         System.out.println("Test 4 passed");
 
-        // New test: 100% SoH, extreme healthy.
+        // New test: 100% SoH, extreme healthy
         int[] presentCapacities5 = {120}; // Should classify as healthy
         CountsBySoH counts5 = countBatteriesByHealth(presentCapacities5);
         assert (counts5.healthy == 1) : "100% healthy test failed";
