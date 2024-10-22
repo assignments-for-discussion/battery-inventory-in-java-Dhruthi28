@@ -42,7 +42,7 @@ public class Main {
     System.out.println("Test 2 passed");
 
     //New test: boundary condition for exchange(63%)
-    int[] presentCapacities3 = {(int)Math.round(120*0.63),(int)Math.round(120*0.83-1)}; //83% and 63% exactly
+    int[] presentCapacities3 = {(int)Math.round(120*0.63),(int)Math.round(120*0.83)-1}; //83% and 63% exactly
     CountsBySoH counts3 = countBatteriesByHealth(presentCapacities3);
     assert(counts3.healthy == 0): "Boundary test healthy(none) failed";
     assert(counts3.healthy == 2): "Boundary test exchange failed";
