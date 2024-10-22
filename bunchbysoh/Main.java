@@ -29,9 +29,9 @@ public class Main {
     //Original Test
     int[] presentCapacities1 = {113, 116, 80, 95, 92, 70};
     CountsBySoH counts1 = countBatteriesByHealth(presentCapacities1);
-    assert(counts.healthy == 2) : "Healthy count failed";
-    assert(counts.exchange == 3) : "Exchange count failed";
-    assert(counts.failed == 1) : "Failed count failed";
+    assert(counts1.healthy == 2) : "Healthy count failed";
+    assert(counts1.exchange == 3) : "Exchange count failed";
+    assert(counts1.failed == 1) : "Failed count failed";
     System.out.println("Test 1 passed");
 
     //New test: boundary condition for healthy (83%)
