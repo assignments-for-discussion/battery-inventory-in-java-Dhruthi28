@@ -42,14 +42,14 @@ public class Main {
     System.out.println("Test 2 passed");
 
     //New test: boundary condition for exchange(63%)
-    int[] presentCapacities3 = {(int)Math.round(120*0.63),(int)Math.round(120*0.83)-1}; //83% and 63% exactly
+    int[] presentCapacities3 = {(int)(120*0.63),(int)(120*0.83)-1}; //83% and 63% exactly
     CountsBySoH counts3 = countBatteriesByHealth(presentCapacities3);
     assert(counts3.healthy == 0): "Boundary test healthy(none) failed";
     assert(counts3.healthy == 2): "Boundary test exchange failed";
     System.out.println("Test 3 passed");
 
     //New test: failed battery at 0% capacity
-    int[] presentCapacities4 = {0,(int)Math.round(120*0.62)}; //should classify both as failed
+    int[] presentCapacities4 = {0,(int)(120*0.62)}; //should classify both as failed
     CountsBySoH counts4 = countBatteriesByHealth(presentCapacities4);
     assert(counts4.failed == 2): "Failed boundary test failed";
     System.out.println("Test 4 passed");
@@ -58,6 +58,7 @@ public class Main {
     int[] presentCapacities5 = {120}; //should classify as healthy
     CountsBySoH counts5 = countBatteriesByHealth(presentCapacities5);
     assert(counts5.healthy == 1) : "100% healthy test failed";
+    System.out.println("Test 5 passed");
     
     System.out.println("All tests passed");
   }
